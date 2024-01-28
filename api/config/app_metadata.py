@@ -8,6 +8,10 @@ _tags_metadata = [
     {
         'name': 'shows',
         'description': 'Access to Tv Maze shows library'
+    },
+    {
+        'name': 'comments',
+        'description': 'Allows you to add a comment and a rating for a show'
     }
 ]
 

@@ -1,5 +1,4 @@
 from lib.mongodb import Connection
-from bson.objectid import ObjectId
 from helpers.time import now
 
 class ShowsContext():
