@@ -19,6 +19,7 @@ class ShowById(BaseModel):
     id: int
     url: str
     name: str
+    comments: Optional[List[SearchComment]]
     type: Optional[str]
     language: Optional[str]
     genres: Optional[List[str]]

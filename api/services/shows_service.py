@@ -16,16 +16,18 @@ class ShowsService():
         return self._append_comments(shows, comments)
 
     def show_by_id(self, id):
-        show = self._shows_context.by_id(id)
-        if (show):
-            return show
-        response = self._tvmaze_api.show_by_id(id)
-        show = response.json()
-        self._shows_context.save(show)
-        return show
+        show = self._get_show_by_id(id)
+        comments = self._get_comments([show])
+        with_comments = self._append_comments([show], comments)
+        return with_comments[0]
+
+    def _get_show_id(self, show):
+        if 'show' in show:
+            return show['show']['id']
+        return show['id']
 
     def _get_comments(self, shows):
-        ids = list(map(lambda s: s['show']['id'], shows))
+        ids = list(map(lambda s: self._get_show_id(s), shows))
         response = self._comments_context.by_ids(ids)
         return list(response)
 
@@ -34,6 +36,15 @@ class ShowsService():
 
     def _append_comments(self, shows, comments):
         for show in shows:
-            show_id = show['show']['id']
+            show_id = self._get_show_id(show)
             show['comments'] = self._comments_by_show(show_id, comments)
         return shows
+
+    def _get_show_by_id(self, id):
+        show = self._shows_context.by_id(id)
+        if (show):
+            return show
+        response = self._tvmaze_api.show_by_id(id)
+        show = response.json()
+        self._shows_context.save(show)
+        return show
