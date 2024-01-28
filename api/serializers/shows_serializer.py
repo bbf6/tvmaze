@@ -9,7 +9,8 @@ def search_item_format(show) -> dict:
       'name': show['show']['name'],
       'channel': get_channel(show),
       'summary': show['show']['summary'],
-      'genres': show['show']['genres']
+      'genres': show['show']['genres'],
+      'comments': show['comments']
     }
 
 def search_format(shows) -> list:

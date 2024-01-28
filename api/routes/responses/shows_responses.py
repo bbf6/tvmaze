@@ -1,12 +1,17 @@
 from pydantic import BaseModel
 from typing import Any, List, Optional
 
+class SearchComment(BaseModel):
+    comment: str
+    rating: int
+
 class Search(BaseModel):
     id: int
     name: str
     channel: str
     summary: Optional[str]
     genres: List[str]
+    comments: Optional[List[SearchComment]]
 
 search_response = List[Search]
 
