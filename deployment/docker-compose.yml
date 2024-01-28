@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: tvmaze_api
+    build: ../api/
+    env_file:
+      - ../api/.env
+    ports:
+      - "6843:8000"

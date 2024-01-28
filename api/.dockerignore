@@ -1,0 +1,19 @@
+# Exclude common Python and system files
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyo
+.pytest_cache
+
+.idea/
+.vscode/
+.DS_Store
+venv/
+__init__.py
+
+Dockerfile*
+.dockerignore
+
+.env*
+.gitignore
