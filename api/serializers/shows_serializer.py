@@ -15,3 +15,6 @@ def search_item_format(show) -> dict:
 
 def search_format(shows) -> list:
     return list(map(search_item_format, shows))
+
+def rating_format(rating) -> dict:
+    return {'rating_average': rating}

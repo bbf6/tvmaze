@@ -1,6 +1,6 @@
 from lib.tvmaze_api import TvMazeApi
 from services.shows_service import ShowsService
-from serializers.shows_serializer import search_format
+from serializers.shows_serializer import search_format, rating_format
 
 class ShowsController():
 
@@ -14,3 +14,8 @@ class ShowsController():
 
     def by_id(self, id):
         return self._service.show_by_id(id)
+
+    def rating(self, id):
+        show = {'id': id}
+        response = self._service.rating(show)
+        return rating_format(response)

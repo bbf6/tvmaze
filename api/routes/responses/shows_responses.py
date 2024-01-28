@@ -39,3 +39,6 @@ class ShowById(BaseModel):
     image: Optional[Any]
     summary: Optional[str]
     updated: Optional[int]
+
+class Rating(BaseModel):
+    rating_average: float

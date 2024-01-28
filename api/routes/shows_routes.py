@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .responses.shows_responses import search_response, ShowById
+from .responses.shows_responses import search_response, ShowById, Rating
 from controllers.shows_controller import ShowsController
 
 shows = APIRouter(prefix='/shows')
@@ -12,3 +12,7 @@ def search(search: str):
 @shows.get('/{id}', response_model=ShowById, tags=['shows'])
 def show_by_id(id: int):
     return _controller.by_id(id)
+
+@shows.get('/rating/{id}', response_model=Rating, tags=['shows'])
+def show_by_id(id: int):
+    return _controller.rating(id)

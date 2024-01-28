@@ -1,3 +1,4 @@
+import time
 from lib.tvmaze_api import TvMazeApi
 from contexts.shows_context import ShowsContext
 from contexts.comments_context import CommentsContext
@@ -21,9 +22,15 @@ class ShowsService():
         with_comments = self._append_comments([show], comments)
         return with_comments[0]
 
+    def rating(self, show):
+        time.sleep(4)
+        comments = self._get_comments([show])
+        if len(comments) == 0: return 0
+        total = sum(comment['rating'] for comment in comments)
+        return total / len(comments)
+
     def _get_show_id(self, show):
-        if 'show' in show:
-            return show['show']['id']
+        if 'show' in show: return show['show']['id']
         return show['id']
 
     def _get_comments(self, shows):
@@ -42,8 +49,7 @@ class ShowsService():
 
     def _get_show_by_id(self, id):
         show = self._shows_context.by_id(id)
-        if (show):
-            return show
+        if (show): return show
         response = self._tvmaze_api.show_by_id(id)
         show = response.json()
         self._shows_context.save(show)
